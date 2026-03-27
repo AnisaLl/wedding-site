@@ -87,6 +87,7 @@
             border-radius: 50%;
             box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         @media (min-width: 768px) {
@@ -160,14 +161,20 @@
             scroll-margin-top: 80px; 
         }
 
-        /* Stile per le immagini mancanti */
-        img {
-            background: rgba(255, 255, 255, 0.05);
-            font-style: italic;
-            text-align: center;
+        /* Stile migliorato per fallback immagini */
+        .img-error-box {
+            width: 100%;
+            height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: #d4af37;
+            font-size: 0.7rem;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            background: rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -195,8 +202,9 @@
             
             <div class="flex justify-center">
                 <div class="photo-frame">
-                    <!-- Foto Principale: rinomina il tuo file in noi.jpg -->
-                    <img src="noi.jpg" alt="[Immagine di Michele e Mabel]" class="w-full h-full object-cover rounded-full" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center text-white/20 italic text-xs p-4\'>Carica noi.jpg</div>'">
+                    <!-- Utilizzo di ./ per forzare la directory corrente su GitHub -->
+                    <img src="./noi.jpg" alt="[Immagine di Michele e Mabel]" class="w-full h-full object-cover rounded-full" 
+                         onerror="handleImageError(this, 'noi.jpg')">
                 </div>
             </div>
 
@@ -275,10 +283,9 @@
                 <h2 class="font-cinzel text-4xl text-center mb-24 tracking-widest">L'Angolo del Turista</h2>
                 <div class="space-y-32">
                     <div class="flex flex-col md:flex-row gap-12 items-center">
-                        <div class="w-full md:w-2/5 h-64 bg-white/5 border border-white/10 overflow-hidden">
-                            <!-- Foto Benevento: rinomina il tuo file in benevento.jpg -->
-                            <img src="benevento.jpg" alt="[Immagine di Benevento]" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                            <div class="w-full h-full hidden items-center justify-center text-white/20 italic">benevento.jpg</div>
+                        <div class="w-full md:w-2/5 h-64 bg-white/5 border border-white/10 overflow-hidden relative">
+                            <img src="./benevento.jpg" alt="[Immagine di Benevento]" class="w-full h-full object-cover" 
+                                 onerror="handleImageError(this, 'benevento.jpg')">
                         </div>
                         <div class="w-full md:w-3/5">
                             <h3 class="font-serif text-3xl text-[#d4af37] mb-6 font-light">Benevento</h3>
@@ -289,10 +296,9 @@
                     </div>
                     
                     <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
-                        <div class="w-full md:w-2/5 h-64 bg-white/5 border border-white/10 overflow-hidden">
-                            <!-- Foto Telese: rinomina il tuo file in telese.jpg -->
-                            <img src="telese.jpg" alt="[Immagine di Telese Terme]" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                            <div class="w-full h-full hidden items-center justify-center text-white/20 italic">telese.jpg</div>
+                        <div class="w-full md:w-2/5 h-64 bg-white/5 border border-white/10 overflow-hidden relative">
+                            <img src="./telese.jpg" alt="[Immagine di Telese Terme]" class="w-full h-full object-cover" 
+                                 onerror="handleImageError(this, 'telese.jpg')">
                         </div>
                         <div class="w-full md:w-3/5">
                             <h3 class="font-serif text-3xl text-[#d4af37] mb-6 text-right md:text-left font-light">Telese Terme</h3>
@@ -359,10 +365,23 @@
     </footer>
 
     <script>
+        // Funzione per gestire errori immagini e mostrare debug
+        function handleImageError(img, filename) {
+            img.style.display = 'none';
+            const container = img.parentElement;
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'img-error-box';
+            errorDiv.innerHTML = `
+                <span class="font-bold text-red-400">ERRORE CARICAMENTO</span>
+                <span class="mt-1">Cercato: <b>${filename}</b></span>
+                <small class="mt-2 opacity-50">Controlla se il file su GitHub è esattamente così (anche maiuscole/minuscole)</small>
+            `;
+            container.appendChild(errorDiv);
+        }
+
         // Creazione stelle
         const starContainer = document.getElementById('stars');
         const starCount = 180;
-
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
@@ -375,41 +394,25 @@
             starContainer.appendChild(star);
         }
 
-        // Observer per animazioni di apparizione
-        const observerOptions = { 
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
+        // Observer per animazioni
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, observerOptions);
+        document.querySelectorAll('.reveal-content').forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.reveal-content').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Gestione navigazione
+        // Smooth scroll
         document.querySelectorAll('.nav-link, a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 if (href.startsWith('#')) {
                     e.preventDefault();
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        const revealChild = targetElement.querySelector('.reveal-content');
-                        if (revealChild) revealChild.classList.add('visible');
+                    const target = document.getElementById(href.substring(1));
+                    if (target) {
                         const offset = 80; 
-                        const bodyRect = document.body.getBoundingClientRect().top;
-                        const elementRect = targetElement.getBoundingClientRect().top;
-                        const elementPosition = elementRect - bodyRect;
-                        const offsetPosition = elementPosition - offset;
-                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
                     }
                 }
             });
