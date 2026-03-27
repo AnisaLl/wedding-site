@@ -4,217 +4,381 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michele & Mabel - Sotto il Cielo del Sannio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --night-blue: #0a192f;
+            --night-blue: #050a18;
+            --deep-blue: #0a192f;
             --star-gold: #d4af37;
-            --soft-white: #f4f4f4;
-            --text-gray: #bdc3c7;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --soft-white: #f8f9fa;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
             background-color: var(--night-blue);
             color: var(--soft-white);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--star-gold);
-            text-align: center;
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+
+        /* Effetto Stelle */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         /* Hero Section */
-        header {
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #112240 0%, #0a192f 100%);
             text-align: center;
-            border-bottom: 1px solid var(--star-gold);
+            padding: 0 20px;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 5px;
+        .gold-gradient-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-date {
-            font-size: 1.5rem;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
+        .photo-frame {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 2rem 0;
+            border: 2px solid var(--star-gold);
+            padding: 10px;
+            border-radius: 50%;
         }
 
         .photo-placeholder {
-            width: 300px;
-            height: 300px;
-            border: 2px solid var(--star-gold);
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-            margin: 30px 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(212, 175, 55, 0.1);
+            overflow: hidden;
         }
 
-        /* Sections Styles */
-        section {
-            padding: 80px 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        .section-divider {
+            width: 100px;
+            height: 2px;
+            background: var(--star-gold);
+            margin: 2rem auto;
+            position: relative;
         }
 
-        .quote {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            text-align: center;
-            font-style: italic;
-            margin-bottom: 40px;
-            color: var(--soft-white);
-        }
-
-        .event-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid var(--star-gold);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        /* Utility */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--star-gold);
-            color: var(--night-blue);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background-color: white;
-            transform: translateY(-3px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.9rem;
+        .section-divider::after {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--night-blue);
+            padding: 0 10px;
             color: var(--star-gold);
         }
 
-        .faq-item { margin-bottom: 20px; }
-        .faq-item b { color: var(--star-gold); display: block; margin-bottom: 5px; }
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
 
+        .card:hover {
+            border-color: var(--star-gold);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--star-gold);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+
+        .scroll-reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1 class="hero-title">Michele & Mabel</h1>
-        <div class="photo-placeholder">
-            <span>[Foto degli Sposi]</span>
+    <!-- Sfondo Stellato -->
+    <div id="stars" class="stars-container"></div>
+
+    <!-- Navigazione Mobile/Desktop -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-black/30 backdrop-blur-md border-b border-white/10">
+        <span class="font-cinzel text-sm tracking-widest text-[#d4af37]">M & M</span>
+        <div class="hidden md:flex space-x-8 font-cinzel text-[10px] tracking-[0.2em] uppercase">
+            <a href="#storia" class="nav-link">La Storia</a>
+            <a href="#programma" class="nav-link">Programma</a>
+            <a href="#viaggio" class="nav-link">Ospiti</a>
+            <a href="#turismo" class="nav-link">Turismo</a>
+            <a href="#rsvp" class="nav-link">RSVP</a>
         </div>
-        <p class="hero-date">10 Agosto 2026 — Solopaca & Paolisi</p>
-        <a href="#rsvp" class="btn">Conferma Presenza</a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <h2 class="font-serif italic text-xl md:text-2xl mb-2 opacity-80">Si sposano</h2>
+        <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl gold-gradient-text tracking-tighter">
+            Michele & Mabel
+        </h1>
+        
+        <div class="photo-frame">
+            <div class="photo-placeholder">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/20">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+            </div>
+        </div>
+
+        <p class="font-cinzel text-lg md:text-xl tracking-[0.3em] uppercase">10 Agosto 2026</p>
+        <p class="font-serif italic text-sm mt-2 text-white/60">Solopaca • Paolisi</p>
+        
+        <div class="mt-12">
+            <a href="#rsvp" class="border border-[#d4af37] text-[#d4af37] px-8 py-3 font-cinzel text-xs tracking-widest hover:bg-[#d4af37] hover:text-[#050a18] transition-all duration-500">
+                CONFERMA PRESENZA
+            </a>
+        </div>
     </header>
 
-    <div class="container">
+    <main class="container mx-auto px-6 max-w-4xl">
         
-        <section id="storia">
-            <p class="quote">"E quindi uscimmo a riveder le stelle."</p>
-            <p style="text-align: center;">Cari amici e colleghi, per il nostro "sì" abbiamo scelto il tema <strong>"La notte delle stelle"</strong>. In quanto insegnanti di materie umanistiche, amiamo pensare al nostro cammino come a una costellazione che trova il suo punto di equilibrio nella notte di San Lorenzo, tra storia, poesia e il magico cielo del Sannio.</p>
+        <!-- Storia Section -->
+        <section id="storia" class="py-24 text-center">
+            <div class="section-divider"></div>
+            <h2 class="font-cinzel text-3xl mb-8">Un Incontro Scritto nel Cielo</h2>
+            <p class="font-serif italic text-2xl mb-8 text-white/90">"E quindi uscimmo a riveder le stelle."</p>
+            <p class="text-white/70 leading-relaxed max-w-2xl mx-auto">
+                Siamo felici di condividere con voi questo giorno speciale. Vi aspettiamo tra le colline del Sannio per festeggiare insieme l'inizio del nostro cammino, sotto la stessa volta celeste che ci ha visti incontrare.
+            </p>
         </section>
 
-        <section id="programma">
-            <h2>Programma della Giornata</h2>
-            <div class="event-card">
-                <h3>11:00 – La Cerimonia Religiosa</h3>
-                <p>Chiesa Madre del Santissimo Corpo di Cristo, Solopaca (BN).<br>
-                <em>Un omaggio alla storia e all'arte barocca che tanto amiamo.</em></p>
+        <!-- Programma Section -->
+        <section id="programma" class="py-24">
+            <h2 class="font-cinzel text-3xl text-center mb-16">Il Programma</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-sm">
+                    <span class="text-[#d4af37] font-cinzel text-xs tracking-widest uppercase">Ore 11:00</span>
+                    <h3 class="font-serif text-2xl my-4">La Cerimonia</h3>
+                    <p class="text-sm text-white/60 mb-4 italic">Chiesa Madre del Santissimo Corpo di Cristo, Solopaca</p>
+                    <p class="text-sm text-white/80 leading-relaxed">
+                        Inizieremo la giornata nella Chiesa Madre di Solopaca, un luogo storico a cui siamo molto legati.
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block mt-6 text-[#d4af37] text-[10px] tracking-widest uppercase border-b border-[#d4af37]">Mappa</a>
+                </div>
+
+                <div class="card p-8 rounded-sm">
+                    <span class="text-[#d4af37] font-cinzel text-xs tracking-widest uppercase">Ore 13:30</span>
+                    <h3 class="font-serif text-2xl my-4">Il Ricevimento</h3>
+                    <p class="text-sm text-white/60 mb-4 italic">Samnium Wedding Resort, Paolisi</p>
+                    <p class="text-sm text-white/80 leading-relaxed">
+                        Dopo la cerimonia ci sposteremo a Paolisi per il pranzo e i festeggiamenti, tra i sapori della nostra terra.
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block mt-6 text-[#d4af37] text-[10px] tracking-widest uppercase border-b border-[#d4af37]">Mappa</a>
+                </div>
             </div>
-            <div class="event-card">
-                <h3>13:30 – Il Ricevimento</h3>
-                <p>Samnium Wedding Resort, Paolisi (BN).<br>
-                Un percorso gastronomico tra i sapori del Sannio, festeggiando insieme fino al tramonto.</p>
+        </section>
+
+        <!-- Viaggio e Alloggio -->
+        <section id="viaggio" class="py-24 bg-white/5 p-10 border border-white/5">
+            <h2 class="font-cinzel text-3xl text-center mb-8">Alloggio</h2>
+            <p class="text-center text-white/70 mb-12">
+                Per chi viene da fuori e desidera pernottare in zona, consigliamo di cercare alloggio a <strong>Benevento</strong>.
+            </p>
+            <div class="text-center">
+                <div class="inline-block text-left border-l-2 border-[#d4af37] pl-6 py-2">
+                    <p class="text-xs text-white/60 leading-loose">
+                        • È il centro principale della zona con numerose strutture.<br>
+                        • Offre molte opzioni per mangiare e passeggiare.<br>
+                        • Si trova a circa 20-30 minuti dalle location del matrimonio.
+                    </p>
+                </div>
             </div>
         </section>
 
-        <section id="viaggio">
-            <h2>Viaggio e Alloggio</h2>
-            <p>Per chi viene da fuori città, consigliamo di soggiornare a <strong>Benevento</strong>. È la base logistica perfetta, ricca di B&B e hotel, situata a circa 20 minuti dalle tappe del matrimonio.</p>
+        <!-- L'Angolo del Turista -->
+        <section id="turismo" class="py-24">
+            <h2 class="font-cinzel text-3xl text-center mb-16">L'Angolo del Turista</h2>
+            <div class="space-y-12">
+                <!-- Benevento -->
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3 h-48 bg-white/5 flex items-center justify-center border border-white/10 italic text-white/20 text-center px-4">
+                        [Immagine di Benevento]
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 class="font-serif text-2xl text-[#d4af37] mb-4">Benevento</h3>
+                        <p class="text-sm text-white/70 leading-relaxed">
+                            Città storica con monumenti importanti come l'<strong>Arco di Traiano</strong> e la <strong>Chiesa di Santa Sofia</strong> (Patrimonio UNESCO). Il centro storico è perfetto per una passeggiata pomeridiana.
+                        </p>
+                    </div>
+                </div>
+                <!-- Telese Terme -->
+                <div class="flex flex-col md:flex-row-reverse gap-8 items-center">
+                    <div class="w-full md:w-1/3 h-48 bg-white/5 flex items-center justify-center border border-white/10 italic text-white/20 text-center px-4">
+                        [Immagine del Lago di Telese]
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 class="font-serif text-2xl text-[#d4af37] mb-4">Telese Terme</h3>
+                        <p class="text-sm text-white/70 leading-relaxed text-right md:text-left">
+                            A pochissimi minuti da Solopaca, Telese è nota per le sue acque termali e il suo lago vulcanico. Nelle vicinanze si possono visitare anche i resti dell'antica città romana di <strong>Telesia</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Grandi Mete Campane -->
+                <div class="card p-10 mt-16 rounded-sm">
+                    <h3 class="font-cinzel text-xl text-center text-[#d4af37] mb-6 tracking-widest uppercase font-bold">Altre destinazioni</h3>
+                    <p class="text-sm text-white/80 leading-relaxed text-center mb-10">
+                        Se avete tempo per esplorare meglio la regione, queste sono le mete principali a circa un'ora di auto:
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div>
+                            <h4 class="font-serif text-lg text-[#d4af37] mb-3">Napoli</h4>
+                            <p class="text-xs text-white/60 leading-relaxed">
+                                Il capoluogo campano, famoso per il suo centro storico, i musei e la cultura gastronomica.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-lg text-[#d4af37] mb-3">Costiera Amalfitana</h4>
+                            <p class="text-xs text-white/60 leading-relaxed">
+                                I famosi borghi sul mare come Amalfi e Positano, raggiungibili per una gita in giornata.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-lg text-[#d4af37] mb-3">Pompei ed Ercolano</h4>
+                            <p class="text-xs text-white/60 leading-relaxed">
+                                Gli scavi archeologici delle città romane sepolte dal Vesuvio, tra i siti più famosi al mondo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="turismo">
-            <h2>Angolo del Turista</h2>
-            <div class="info-grid">
+        <!-- FAQ -->
+        <section id="faq" class="py-24 border-t border-white/10">
+            <h2 class="font-cinzel text-3xl text-center mb-16">Informazioni Utili</h2>
+            <div class="grid md:grid-cols-2 gap-12">
                 <div>
-                    <h3>Benevento</h3>
-                    <p>Da non perdere l'Arco di Traiano e la <strong>Chiesa di Santa Sofia (UNESCO)</strong>, famosa per la sua pianta stellare.</p>
+                    <h4 class="font-cinzel text-[#d4af37] text-xs tracking-widest uppercase mb-4">Dress Code</h4>
+                    <p class="text-sm text-white/70">È gradito un abbigliamento elegante. Essendo agosto, consigliamo tessuti leggeri.</p>
                 </div>
                 <div>
-                    <h3>Sant'Agata de' Goti</h3>
-                    <p>Uno dei borghi più belli d'Italia, costruito su uno sperone di tufo. Perfetto per una passeggiata letteraria.</p>
+                    <h4 class="font-cinzel text-[#d4af37] text-xs tracking-widest uppercase mb-4">Ricevimento</h4>
+                    <p class="text-sm text-white/70">Il matrimonio si svolgerà interamente a pranzo e si concluderà nel tardo pomeriggio.</p>
+                </div>
+                <div>
+                    <h4 class="font-cinzel text-[#d4af37] text-xs tracking-widest uppercase mb-4">Parcheggio</h4>
+                    <p class="text-sm text-white/70">Sia la Chiesa che il ristorante dispongono di parcheggio.</p>
+                </div>
+                <div>
+                    <h4 class="font-cinzel text-[#d4af37] text-xs tracking-widest uppercase mb-4">Bambini</h4>
+                    <p class="text-sm text-white/70">Tutti i bambini sono i benvenuti; vi preghiamo solo di segnalarcelo nell'RSVP per l'organizzazione dei tavoli.</p>
                 </div>
             </div>
         </section>
 
-        <section id="faq">
-            <h2>Domande Frequenti</h2>
-            <div class="faq-item">
-                <b>Dress Code?</b>
-                <p>È gradito un abbigliamento elegante per una cerimonia diurna.</p>
-            </div>
-            <div class="faq-item">
-                <b>Evento diurno o serale?</b>
-                <p>Sarà un evento diurno: inizieremo al mattino e brinderemo insieme fino al tardo pomeriggio.</p>
-            </div>
-            <div class="faq-item">
-                <b>Parcheggio?</b>
-                <p>Il resort dispone di un ampio parcheggio riservato agli ospiti.</p>
-            </div>
-        </section>
-
-        <section id="rsvp" style="text-align: center;">
-            <h2>RSVP</h2>
-            <p>Fateci sapere se sarete dei nostri!</p>
-            <div style="margin-top: 30px; border: 1px dashed var(--star-gold); padding: 40px;">
-                <p>[Qui potrai inserire un modulo Google Forms o un contatto WhatsApp]</p>
+        <!-- RSVP -->
+        <section id="rsvp" class="py-24 text-center">
+            <div class="section-divider"></div>
+            <h2 class="font-cinzel text-4xl mb-6">RSVP</h2>
+            <p class="font-serif italic text-white/60 mb-12">Fateci sapere se sarete con noi.</p>
+            
+            <div class="max-w-md mx-auto p-12 border border-[#d4af37]/30 bg-white/5">
+                <p class="text-sm mb-8 text-white/80">
+                    Vi chiediamo di confermare la vostra presenza entro il [Data].
+                </p>
+                <div class="space-y-4">
+                    <p class="text-[10px] tracking-[0.2em] text-[#d4af37] uppercase">Link al modulo</p>
+                    <div class="h-12 border border-white/10 flex items-center justify-center text-white/30 italic text-xs">
+                        [Modulo RSVP Google / WhatsApp]
+                    </div>
+                </div>
             </div>
         </section>
 
-    </div>
+    </main>
 
-    <footer>
-        <p>Michele & Mabel — 10.08.2026</p>
+    <footer class="py-12 text-center border-t border-white/5 opacity-50">
+        <p class="font-cinzel text-[10px] tracking-[0.4em] uppercase">Michele & Mabel — 10.08.2026</p>
     </footer>
 
+    <script>
+        // Generazione stelle casuali
+        const starContainer = document.getElementById('stars');
+        const starCount = 150;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+            starContainer.appendChild(star);
+        }
+
+        // Animazione allo scorrimento
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('scroll-reveal');
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
