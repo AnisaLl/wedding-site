@@ -79,21 +79,21 @@
 
         .photo-frame {
             position: relative;
-            width: 280px;
-            height: 280px;
+            width: 260px;
+            height: 320px;
             margin: 4rem 0;
             border: 2px solid var(--star-gold);
-            padding: 12px;
-            border-radius: 50%;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            padding: 8px;
+            border-radius: 1.5rem;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
             overflow: hidden;
             background: rgba(255, 255, 255, 0.02);
         }
 
         @media (min-width: 768px) {
             .photo-frame {
-                width: 340px;
-                height: 340px;
+                width: 300px;
+                height: 380px;
             }
         }
 
@@ -210,7 +210,7 @@
             
             <div class="flex justify-center">
                 <div class="photo-frame">
-                    <img src="./mm.jpeg" alt="[Immagine di Michele e Mabel]" class="w-full h-full object-cover rounded-full" 
+                    <img src="./mm.jpeg" alt="[Immagine di Michele e Mabel]" class="w-full h-full object-cover" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="img-placeholder hidden">Una foto di noi</div>
                 </div>
