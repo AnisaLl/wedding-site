@@ -110,17 +110,10 @@
 
     <div id="stars" class="stars-container"></div>
 
-    <!-- Navigation fixed and structured with a grid to ensure center logo + non-overlapping items -->
     <nav class="fixed w-full z-50 px-6 py-5 grid grid-cols-[1fr_auto_1fr] items-center bg-black/60 backdrop-blur-md border-b border-white/10">
-        <!-- Spacer (left) -->
         <div></div>
-        
-        <!-- Logo (Center) -->
         <span class="font-cinzel text-base tracking-widest text-[#d4af37] relative z-50">M & M</span>
-        
-        <!-- Menu Container (Right) -->
         <div class="flex justify-end relative z-50">
-            <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-10 font-cinzel text-[11px] tracking-[0.25em] uppercase">
                 <a href="#benvenuti" class="nav-link">Benvenuti</a>
                 <a href="#programma" class="nav-link">Programma</a>
@@ -129,7 +122,6 @@
                 <a href="#rsvp" class="nav-link">RSVP</a>
             </div>
 
-            <!-- Mobile Menu Toggle Button -->
             <button id="mobile-menu-btn" class="md:hidden text-[#d4af37] focus:outline-none">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -138,7 +130,6 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#050a18]/98 backdrop-blur-lg z-40 flex flex-col items-center justify-center space-y-8 font-cinzel text-sm tracking-[0.3em] uppercase opacity-0 pointer-events-none transition-opacity duration-300">
         <a href="#benvenuti" class="mobile-nav-link text-white hover:text-[#d4af37] transition-colors">Benvenuti</a>
         <a href="#programma" class="mobile-nav-link text-white hover:text-[#d4af37] transition-colors">Programma</a>
@@ -275,18 +266,10 @@
             <div class="reveal-content">
                 <div class="section-divider"></div>
                 <h2 class="font-cinzel text-5xl mb-10 tracking-widest">RSVP</h2>
-                <p class="font-serif italic text-2xl text-white/60 mb-16">Fateci sapere se sarete con noi.</p>
+                <p class="font-serif italic text-2xl text-white/60 mb-16">Fateci sapere se sarete con noi entro il 20.07.2026.</p>
                 
-                <div class="max-w-xl mx-auto p-16 border border-[#d4af37]/30 bg-white/5 rounded-sm">
-                    <p class="text-base mb-12 text-white/80 leading-relaxed uppercase tracking-widest font-light">
-                        Vi preghiamo di confermare la vostra presenza entro il <span class="text-[#d4af37] font-semibold">20.07.2026</span>.
-                    </p>
-                    <div class="space-y-6">
-                        <p class="text-xs tracking-[0.4em] text-[#d4af37] uppercase">Link al modulo di conferma</p>
-                        <div class="h-16 border border-white/10 flex items-center justify-center text-white/30 italic text-sm tracking-widest">
-                            [Modulo RSVP Google / WhatsApp]
-                        </div>
-                    </div>
+                <div class="max-w-2xl mx-auto border border-[#d4af37]/30 bg-white/5 rounded-sm overflow-hidden">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeu-6lqpkpXQU4-w6ESFZOC7FApP-GxU5V3EHSdBSKv6mzkdw/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Caricamento in corso...</iframe>
                 </div>
             </div>
         </section>
@@ -315,7 +298,6 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.reveal-content').forEach(el => observer.observe(el));
 
-        // Smooth scroll for all hash links (including new mobile menu links)
         document.querySelectorAll('.nav-link, .mobile-nav-link, a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -329,7 +311,6 @@
             });
         });
 
-        // Mobile Menu Toggle Logic
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-nav-link');
@@ -338,15 +319,13 @@
         function toggleMenu() {
             const isOpen = mobileMenu.classList.contains('opacity-100');
             if (isOpen) {
-                // Close Menu
                 mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
                 mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-                iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Hamburger Icon
+                iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
             } else {
-                // Open Menu
                 mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
                 mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-                iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // X Icon
+                iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
             }
         }
 
