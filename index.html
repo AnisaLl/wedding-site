@@ -21,10 +21,7 @@
             --soft-white: #f8f9fa;
         }
 
-        html { 
-            scroll-behavior: smooth; 
-        }
-        
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--night-blue);
             color: var(--soft-white);
@@ -37,21 +34,13 @@
         .font-cinzel { font-family: 'Cinzel', serif; }
 
         .stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(ellipse at bottom, #0a192f 0%, #050a18 100%);
             overflow: hidden;
         }
 
         .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
+            position: absolute; background: white; border-radius: 50%; opacity: 0.5;
             animation: twinkle var(--duration) infinite ease-in-out;
         }
 
@@ -61,128 +50,59 @@
         }
 
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px;
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 120px 20px;
         }
 
         .gold-gradient-text {
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;
         }
 
+        /* Portrait photo frame - Softly rounded rectangle */
         .photo-frame {
-            position: relative;
-            width: 260px;
-            height: 320px;
-            margin: 4rem 0;
-            border: 2px solid var(--star-gold);
-            padding: 8px;
-            border-radius: 1.5rem;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.02);
+            position: relative; width: 260px; height: 320px; margin: 4rem 0;
+            border: 2px solid var(--star-gold); padding: 12px;
+            border-radius: 1.5rem; box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            overflow: hidden; background: rgba(255, 255, 255, 0.02);
         }
 
-        @media (min-width: 768px) {
-            .photo-frame {
-                width: 300px;
-                height: 380px;
-            }
-        }
+        @media (min-width: 768px) { .photo-frame { width: 300px; height: 360px; } }
 
         .section-divider {
-            width: 120px;
-            height: 2px;
-            background: var(--star-gold);
-            margin: 4rem auto;
-            position: relative;
+            width: 120px; height: 2px; background: var(--star-gold);
+            margin: 4rem auto; position: relative;
         }
-
         .section-divider::after {
-            content: '✦';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--night-blue);
-            padding: 0 15px;
-            color: var(--star-gold);
+            content: '✦'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--night-blue); padding: 0 15px; color: var(--star-gold);
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px); transition: all 0.3s ease;
         }
+        .card:hover { border-color: var(--star-gold); background: rgba(255, 255, 255, 0.06); }
 
-        .card:hover {
-            border-color: var(--star-gold);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
+        .nav-link { position: relative; transition: color 0.3s; cursor: pointer; }
         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: var(--star-gold);
-            transition: width 0.3s;
+            content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0;
+            background-color: var(--star-gold); transition: width 0.3s;
         }
-
         .nav-link:hover::after { width: 100%; }
 
-        .reveal-content { 
-            opacity: 0; 
-            transform: translateY(30px); 
-            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); 
-        }
-        .reveal-content.visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .reveal-content { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal-content.visible { opacity: 1; transform: translateY(0); }
 
-        section { 
-            scroll-margin-top: 80px; 
-        }
+        section { scroll-margin-top: 80px; }
 
-        .tourist-img-container {
-            transition: all 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        
-        .tourist-img-container:hover {
-            transform: rotate(0deg) scale(1.03);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
-        }
+        .tourist-img-container { transition: all 0.5s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .tourist-img-container:hover { transform: rotate(0deg) scale(1.03); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15); }
 
         .img-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #d4af37;
-            font-size: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.1em;
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: #d4af37; font-size: 0.75rem; background: rgba(255, 255, 255, 0.05);
+            font-family: 'Cinzel', serif; letter-spacing: 0.1em;
         }
     </style>
 </head>
@@ -190,9 +110,16 @@
 
     <div id="stars" class="stars-container"></div>
 
-    <nav class="fixed w-full z-50 px-8 py-5 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-white/10">
+    <!-- Navigation fixed and structured with a grid to ensure center logo + non-overlapping items -->
+    <nav class="fixed w-full z-50 px-6 py-5 grid grid-cols-[1fr_auto_1fr] items-center bg-black/60 backdrop-blur-md border-b border-white/10">
+        <!-- Spacer (left) -->
+        <div></div>
+        
+        <!-- Logo (Center) -->
         <span class="font-cinzel text-base tracking-widest text-[#d4af37]">M & M</span>
-        <div class="hidden md:flex space-x-10 font-cinzel text-[11px] tracking-[0.25em] uppercase">
+        
+        <!-- Menu (Right) -->
+        <div class="hidden md:flex justify-end space-x-10 font-cinzel text-[11px] tracking-[0.25em] uppercase">
             <a href="#benvenuti" class="nav-link">Benvenuti</a>
             <a href="#programma" class="nav-link">Programma</a>
             <a href="#alloggio" class="nav-link">Alloggio</a>
@@ -203,7 +130,7 @@
 
     <header class="hero">
         <div class="reveal-content visible">
-            <h2 class="font-serif italic text-2xl md:text-3xl mb-8 opacity-80">Ci sposiamo!</h2>
+            <h2 class="font-serif italic text-2xl md:text-3xl mb-8 opacity-80">Ci sposiamo</h2>
             <h1 class="font-cinzel text-6xl md:text-8xl lg:text-9xl gold-gradient-text tracking-tighter mb-4 px-4">
                 Michele & Mabel
             </h1>
@@ -290,7 +217,6 @@
             <div class="reveal-content">
                 <h2 class="font-cinzel text-4xl text-center mb-24 tracking-widest">L'Angolo del Turista</h2>
                 <div class="space-y-32">
-                    <!-- Benevento -->
                     <div class="flex flex-col md:flex-row gap-16 items-center">
                         <div class="w-full md:w-1/3 tourist-img-container -rotate-1">
                             <div class="h-64 bg-white/5 rounded-2xl border border-white/10 overflow-hidden relative p-1">
@@ -307,7 +233,6 @@
                         </div>
                     </div>
                     
-                    <!-- Telese -->
                     <div class="flex flex-col md:flex-row-reverse gap-16 items-center">
                         <div class="w-full md:w-1/3 tourist-img-container rotate-1">
                             <div class="h-64 bg-white/5 rounded-2xl border border-white/10 overflow-hidden relative p-1">
@@ -323,33 +248,6 @@
                             </p>
                         </div>
                     </div>
-
-                    <div class="card p-16 mt-32 rounded-sm border border-[#d4af37]/20">
-                        <h3 class="font-cinzel text-2xl text-center text-[#d4af37] mb-10 tracking-[0.4em] uppercase font-bold">Oltre il Sannio</h3>
-                        <p class="text-base text-white/80 leading-relaxed text-center mb-16 max-w-2xl mx-auto">
-                            Se avete a disposizione qualche giorno extra, la Campania offre mete leggendarie a breve distanza dal cuore del Sannio:
-                        </p>
-                        <div class="grid md:grid-cols-3 gap-12">
-                            <div class="text-center">
-                                <h4 class="font-serif text-2xl text-[#d4af37] mb-5">Napoli</h4>
-                                <p class="text-sm text-white/60 leading-relaxed">
-                                    L'anima vibrante della regione, tra musei, vicoli storici e il lungomare ai piedi del Vesuvio.
-                                </p>
-                            </div>
-                            <div class="text-center">
-                                <h4 class="font-serif text-2xl text-[#d4af37] mb-5">Costiera</h4>
-                                <p class="text-sm text-white/60 leading-relaxed">
-                                    I panorami mozzafiato di Amalfi e Positano, gemme incastonate nel blu del Mediterraneo.
-                                </p>
-                            </div>
-                            <div class="text-center">
-                                <h4 class="font-serif text-2xl text-[#d4af37] mb-5">Pompei</h4>
-                                <p class="text-sm text-white/60 leading-relaxed">
-                                    Un'immersione senza tempo negli scavi archeologici più famosi e suggestivi del mondo.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -362,7 +260,7 @@
                 
                 <div class="max-w-xl mx-auto p-16 border border-[#d4af37]/30 bg-white/5 rounded-sm">
                     <p class="text-base mb-12 text-white/80 leading-relaxed uppercase tracking-widest font-light">
-                        Vi preghiamo di confermare la vostra presenza entro il <span class="text-[#d4af37] font-semibold">20.07.2026</span>.
+                        Vi preghiamo di confermare la vostra presenza entro il <span class="text-[#d4af37] font-semibold">[Inserire Data Conferma]</span>.
                     </p>
                     <div class="space-y-6">
                         <p class="text-xs tracking-[0.4em] text-[#d4af37] uppercase">Link al modulo di conferma</p>
@@ -373,7 +271,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="py-24 text-center border-t border-white/5 opacity-40">
@@ -387,20 +284,16 @@
             const star = document.createElement('div');
             star.className = 'star';
             const size = (Math.random() * 2 + 1).toFixed(1) + 'px';
-            star.style.width = size;
-            star.style.height = size;
+            star.style.width = size; star.style.height = size;
             star.style.top = (Math.random() * 100).toFixed(2) + '%';
             star.style.left = (Math.random() * 100).toFixed(2) + '%';
             star.style.setProperty('--duration', (Math.random() * 3 + 2).toFixed(1) + 's');
             starContainer.appendChild(star);
         }
 
-        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, observerOptions);
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.reveal-content').forEach(el => observer.observe(el));
 
         document.querySelectorAll('.nav-link, a[href^="#"]').forEach(anchor => {
@@ -410,8 +303,7 @@
                     e.preventDefault();
                     const target = document.getElementById(href.substring(1));
                     if (target) {
-                        const offset = 80; 
-                        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
                     }
                 }
             });
